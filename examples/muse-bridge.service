@@ -1,0 +1,25 @@
+# Example systemd unit for muse-bridge-rs.
+# NOTE: the reference deployment supervises the bridge with scripts/watchdog.sh
+# because its host has no working systemd user bus. Use this unit on hosts
+# where systemd is available. Adjust paths and User= before installing:
+#   cp examples/muse-bridge.service ~/.config/systemd/user/
+#   systemctl --user daemon-reload && systemctl --user enable --now muse-bridge
+
+[Unit]
+Description=muse-bridge-rs — OpenAI-compatible bridge with worker-pull queue
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/you/muse-bridge/bin/muse-bridge serve
+WorkingDirectory=/home/you/muse-bridge
+EnvironmentFile=-/home/you/muse-bridge/bridge.env
+Restart=on-failure
+RestartSec=5
+# The bridge only needs its own directory (DB, keys, logs).
+ReadWritePaths=/home/you/muse-bridge
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=default.target
