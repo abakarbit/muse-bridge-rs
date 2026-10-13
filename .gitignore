@@ -1,0 +1,32 @@
+# Rust build artifacts
+/target
+**/*.rs.bk
+
+# Runtime data — NEVER commit
+*.db
+*.db-shm
+*.db-wal
+keys/
+logs/
+backups/
+bin/
+*.log
+*.pid
+
+# Secrets & local config
+.env
+.env.*
+!.env.example
+config.json
+*.key
+*.pem
+
+# Binaries built locally
+muse-bridge
+picoclaw
+
+# Editor / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
