@@ -1,0 +1,28 @@
+[package]
+name = "muse-bridge-rs"
+version = "0.1.0"
+edition = "2021"
+description = "OpenAI-compatible bridge with a worker-pull job queue — connects chat gateways to an LLM agent worker with no inbound access to the agent host"
+license = "MIT"
+repository = "https://github.com/abakarbit/muse-bridge-rs"
+readme = "README.md"
+keywords = ["openai", "llm", "bridge", "telegram", "queue"]
+categories = ["command-line-utilities"]
+
+[[bin]]
+name = "muse-bridge"
+path = "src/main.rs"
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+tokio-stream = "0.1"
+axum = "0.7"
+axum-server = { version = "0.7", features = ["tls-rustls"] }
+rusqlite = { version = "0.31", features = ["bundled"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+clap = { version = "4", features = ["derive"] }
+sha2 = "0.10"
+uuid = { version = "1", features = ["v4"] }
